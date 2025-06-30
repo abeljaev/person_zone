@@ -1,0 +1,41 @@
+api:
+  audio_file: 1.wav
+  base_url: https://31.148.204.230
+  password: admin
+  request_on_timer_end: false
+  requests_on_entry: 1
+  retry_count: 3
+  retry_delay: 1.0
+  timeout: 10.0
+  timer_duration: 20.0
+  username: admin
+debug:
+  debug_mode: true
+  enable_keys: true
+  fps_log_interval: 25
+  log_level: INFO
+detection:
+  bottom_point_offset: 0.05
+  classes:
+  - 0
+  confidence: 0.6
+  detection_size: 640
+  frame_skip: 1
+  frame_window_size: 10
+  min_frames_in_zone: 5
+  model_path: config/yolo11m.pt
+  resize_for_detection: true
+logging:
+  backup_count: 5
+  file: logs/person_zone.log
+  max_size_mb: 10
+tracker:
+  iou_threshold: 0.3
+  max_age: 15
+  min_hits: 3
+video:
+  buffer_size: 64
+  loop: true
+  target_fps: 0
+zones:
+  default_file: config/zones.json

@@ -1,0 +1,15 @@
+opencv-python>=4.8.0
+numpy>=1.24.0
+
+ultralytics>=8.0.0
+torch
+torchvision
+
+shapely>=2.0.0
+
+requests>=2.28.0
+urllib3>=1.26.0
+
+PyYAML>=6.0.0
+
+lap>=0.5.12

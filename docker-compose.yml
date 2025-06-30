@@ -1,0 +1,58 @@
+services:
+  person-zone:
+    build: .
+    container_name: person-zone-system
+    volumes:
+      - ./logs:/app/logs
+      - ./config:/app/config
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+      - DISPLAY=${DISPLAY:-:0}
+      - YOLO_CONFIG_DIR=/tmp/Ultralytics
+    # Оптимизация производительности
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: '2.0'
+        reservations:
+          memory: 2G
+          cpus: '1.0'
+    shm_size: 2gb
+    restart: unless-stopped
+    command: >
+      python scripts/run_person_zone.py
+      --video "rtsp://cam:asd123123@31.148.204.230:9554/cam/realmonitor?channel=1&subtype=0"
+      --zones "config/zones_rtsp.json"
+      --config "config/config.yaml"
+      --debug
+
+  # Сервис для работы без отображения видео
+  person-zone-headless:
+    build: .
+    container_name: person-zone-headless
+    volumes:
+      - ./logs:/app/logs
+      - ./config:/app/config
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: '2.0'
+        reservations:
+          memory: 2G
+          cpus: '1.0'
+    shm_size: 2gb
+    restart: unless-stopped
+    command: >
+      python scripts/run_person_zone.py
+      --video "rtsp://cam:asd123123@31.148.204.230:9554/cam/realmonitor?channel=1&subtype=0"
+      --zones "config/zones_rtsp.json"
+      --config "config/config.yaml"
+    profiles:
+      - production
