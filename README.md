@@ -1,7 +1,7 @@
 1. Клонируем репозиторий:
 ```bash
 git clone git@github.com:abeljaev/person_zone.git
-cd person-zone
+cd person_zone
 ```
 
 2. Создайте виртуальное окружение и установите зависимости:
